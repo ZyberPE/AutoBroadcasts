@@ -20,11 +20,11 @@ class Main extends PluginBase {
 
     protected function onEnable(): void {
         $this->saveDefaultConfig();
-        $this->loadConfig();
+        $this->loadConfigValues();
         $this->startTask();
     }
 
-    private function loadConfig(): void {
+    private function loadConfigValues(): void {
         $this->reloadConfig();
 
         $this->interval = (int)$this->getConfig()->get("internal", 120);
@@ -44,13 +44,15 @@ class Main extends PluginBase {
 
     private function executeCycle(): void {
 
-        // Broadcast rotating message
+        // Send rotating broadcast message
         if(!empty($this->broadcastMessages)){
+
             if(!isset($this->broadcastMessages[$this->currentIndex])){
                 $this->currentIndex = 0;
             }
 
             $message = $this->broadcastMessages[$this->currentIndex];
+
             $this->getServer()->broadcastMessage(
                 TextFormat::colorize($this->prefix . $message)
             );
@@ -58,7 +60,7 @@ class Main extends PluginBase {
             $this->currentIndex++;
         }
 
-        // Execute commands with custom messages
+        // Execute commands safely (API 5 compatible)
         foreach($this->broadcastCommands as $data){
 
             if(!isset($data["command"])) continue;
@@ -66,13 +68,12 @@ class Main extends PluginBase {
             $command = (string)$data["command"];
             $customMessage = $data["message"] ?? null;
 
-            // Execute as console
+            // ✅ FIXED HERE
             $this->getServer()->dispatchCommand(
-                $this->getServer()->getCommandMap()->getConsoleSender(),
+                $this->getServer()->getConsoleSender(),
                 $command
             );
 
-            // Send custom broadcast message if set
             if($customMessage !== null){
                 $this->getServer()->broadcastMessage(
                     TextFormat::colorize($this->prefix . $customMessage)
