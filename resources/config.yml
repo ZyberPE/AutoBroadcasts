@@ -1,0 +1,20 @@
+internal: 120 # seconds between broadcasts
+
+prefix: "§8[§eAuto§cBroadcast§8] §8»§r "
+
+broadcast-message:
+  - "§7Do you need support for the plugin? contact me on discord. @akari_my"
+  - "§7To always be updated on the plugin, always visit the github. https://github.com/Akari-my"
+  - "§7AutoBroadcast made with §c❤ §7by §eAkari_my"
+
+# Commands executed every cycle
+broadcast-commands:
+  - command: "say This was executed by AutoBroadcast!"
+    message: "§aA console command was just executed!"
+
+  - command: "give @a diamond 1"
+    message: "§bEveryone received a diamond!"
+
+messages:
+  no_permission: "§cYou do not have permission to use this command."
+  usage: "§cUsage: /broadcast <message>"
