@@ -9,6 +9,7 @@ use pocketmine\scheduler\ClosureTask;
 use pocketmine\utils\TextFormat;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\console\ConsoleCommandSender;
 
 class Main extends PluginBase {
 
@@ -44,7 +45,7 @@ class Main extends PluginBase {
 
     private function executeCycle(): void {
 
-        // Send rotating broadcast message
+        // Send rotating message
         if(!empty($this->broadcastMessages)){
 
             if(!isset($this->broadcastMessages[$this->currentIndex])){
@@ -60,7 +61,7 @@ class Main extends PluginBase {
             $this->currentIndex++;
         }
 
-        // Execute commands safely (API 5 compatible)
+        // Execute commands as console (API 5 compatible)
         foreach($this->broadcastCommands as $data){
 
             if(!isset($data["command"])) continue;
@@ -68,11 +69,12 @@ class Main extends PluginBase {
             $command = (string)$data["command"];
             $customMessage = $data["message"] ?? null;
 
-            // ✅ FIXED HERE
-            $this->getServer()->dispatchCommand(
-                $this->getServer()->getConsoleSender(),
-                $command
+            $console = new ConsoleCommandSender(
+                $this->getServer(),
+                $this->getServer()->getLanguage()
             );
+
+            $this->getServer()->dispatchCommand($console, $command);
 
             if($customMessage !== null){
                 $this->getServer()->broadcastMessage(
