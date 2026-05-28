@@ -1,19 +1,27 @@
-internal: 120 # seconds between broadcasts
+internal: 100 # seconds between broadcasts
 
-prefix: "§8[§eAuto§cBroadcast§8] §8»§r "
+prefix: ""
 
 broadcast-message:
-  - "§7Do you need support for the plugin? contact me on discord. @akari_my"
-  - "§7To always be updated on the plugin, always visit the github. https://github.com/Akari-my"
-  - "§7AutoBroadcast made with §c❤ §7by §eAkari_my"
+  - "§7see the server shop at > coming soon!"
+  - "§7see the server discord at > coming soon!"
+  - "§7dont forget too duplicate bank notes and xpbottles using /withdrawl and /xpb and /dupe!"
+  - "§7vote for ZyberPE at > coming soon!"
+  - "§7use /dupe too duplicate the items in your inventory in your base or /wild!"
+  - "§7use /shop too buy items, blocks and more!"
+  - "§7use /rules too view server rules!"
+  - "§7use /howtooplay too view how too play and dupe and how much more!"
+  - "§7use /howtoodupe too view how too dupe!"
+  - "§7ZyberPE is still in the making were only getting started with this great upcoming events so many more things too come!"
+  - "§7use /warps too view warps /warp pvp too teleport too pvp"
 
 # Commands executed every cycle
 broadcast-commands:
-  - command: "say This was executed by AutoBroadcast!"
-    message: "§aA console command was just executed!"
+ # - command: "say This was executed by AutoBroadcast!"
+ #   message: "§aA console command was just executed!"
 
-  - command: "give @a diamond 1"
-    message: "§bEveryone received a diamond!"
+ # - command: "give @a diamond 1"
+ #  message: "§bEveryone received a diamond!"
 
 messages:
   no_permission: "§cYou do not have permission to use this command."
